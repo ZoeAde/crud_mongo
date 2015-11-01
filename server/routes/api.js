@@ -13,6 +13,16 @@ router.get('/cartoons', function(req, res, next) {
   });
 });
 
+router.get('/cartoon/:id', function(req, res, next) {
+  Cartoon.findById(req.params.id, function(err, cartoon) {
+      if (err) {
+        res.json({'message': err});
+      } else {
+        res.json(cartoon);
+      }
+  });
+});
+
 router.post('/cartoons', function(req, res, next) {
   var newCartoon = new Cartoon ({
     name: req.body.name,
